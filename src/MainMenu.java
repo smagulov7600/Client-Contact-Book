@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainMenu extends JPanel {
     private MainFrame parent;
@@ -9,17 +11,31 @@ public class MainMenu extends JPanel {
 
         this.parent = parent;
 
-        setSize(500,500);
+        setSize(600,600);
         setLayout(null);
 
-        addButton = new JButton("First Page");
-        addButton.setSize(300,30);
-        addButton.setLocation(100,100);
+        addButton = new JButton("Add Client");
+        addButton.setSize(300,50);
+        addButton.setLocation(150,175);
         add(addButton);
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                parent.getMainMenu().setVisible(false);
+                parent.getAddClient().setVisible(true);
+            }
+        });
 
-        listButton = new JButton("Second Page");
-        listButton.setSize(300,30);
-        listButton.setLocation(100,150);
+        listButton = new JButton("List All Clients");
+        listButton.setSize(300,50);
+        listButton.setLocation(150,325);
         add(listButton);
+        listButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                parent.getMainMenu().setVisible(false);
+                parent.getListAllClients().setVisible(true);
+            }
+        });
     }
 }
