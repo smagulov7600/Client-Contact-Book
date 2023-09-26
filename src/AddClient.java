@@ -65,7 +65,7 @@ public class AddClient extends JPanel {
         add(signatureCheckBox);
 
         // Buttons
-        JButton next = new JButton("Next");
+        JButton next = new JButton("Proceed");
         next.setSize(150, 50);
         next.setLocation(300, 425);
         add(next);
@@ -88,7 +88,7 @@ public class AddClient extends JPanel {
                 if (email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                     try {
                         // Create a connection to the database
-                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clientlist", "root", "130620");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clientlist", "root", "mypass");
 
                         // Prepare the SQL query to insert client data
                         String insertQuery = "INSERT INTO clients (first_name, last_name, phone_number, email, date_of_business) VALUES (?, ?, ?, ?, ?)";

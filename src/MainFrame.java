@@ -5,7 +5,7 @@ public class MainFrame extends JFrame {
     private AddClient addClient;
     private ListAllClients listAllClients;
     public MainFrame(){
-        setTitle("");
+        setTitle("Client Panel");
         setSize(600,600);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

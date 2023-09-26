@@ -1,7 +1,5 @@
 import javax.swing.*;
-
 public class MainMenu extends JPanel {
-
     public MainMenu(MainFrame parent){
 
         setSize(600,600);
@@ -23,7 +21,7 @@ public class MainMenu extends JPanel {
         listButton.addActionListener(e -> {
             parent.getMainMenu().setVisible(false);
             parent.getListAllClients().setVisible(true);
-            parent.setSize(900,600);
+            parent.setSize(900,640);
         });
     }
 }
