@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,12 +9,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.TableColumnModel;
 
 public class ListAllClients extends JPanel {
     private JTable table;
     private JTextField searchField;
+    private String username;
+    private String password;
 
     public ListAllClients(MainFrame parent) {
+
         setSize(900, 600);
         setLayout(new BorderLayout());
 
@@ -37,8 +42,14 @@ public class ListAllClients extends JPanel {
         // Table
         String[] columnNames = {"ID", "Name", "Surname", "Phone", "Email", "Date"}; // Column names
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-
         table = new JTable(model);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+
+        TableColumnModel columnModel = table.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(5);
 
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Only single-row selection
         table.getTableHeader().setReorderingAllowed(false); // Disable column reordering
@@ -53,9 +64,11 @@ public class ListAllClients extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        fetchClientData();
-
-        refresh.addActionListener(e -> fetchClientData());
+        refresh.addActionListener(e -> {
+            username = parent.getAuthorizationMenu().getUsername();
+            password = parent.getAuthorizationMenu().getPassword();
+            fetchClientData();
+        });
 
         back.addActionListener(e -> {
             parent.getMainMenu().setVisible(true);
@@ -77,14 +90,13 @@ public class ListAllClients extends JPanel {
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                // Not used for plain text fields
             }
         });
     }
 
     private void performSearch(String searchText) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clientlist", "root", "mypass");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clientlist", username, password);
 
             Statement statement = connection.createStatement();
 
@@ -119,7 +131,7 @@ public class ListAllClients extends JPanel {
 
     private void fetchClientData() {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clientlist", "root", "mypass");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clientlist", username, password);
 
             Statement statement = connection.createStatement();
 

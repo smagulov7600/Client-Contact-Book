@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddClient extends JPanel {
+    private String username;
+    private String password;
     public AddClient(MainFrame parent) {
 
         setSize(600, 600);
@@ -15,59 +17,59 @@ public class AddClient extends JPanel {
         // Labels
         JLabel nameLabel = new JLabel("Name:");
         nameLabel.setSize(100, 30);
-        nameLabel.setLocation(100, 100);
+        nameLabel.setLocation(160, 100);
         add(nameLabel);
 
         JLabel surnameLabel = new JLabel("Surname:");
         surnameLabel.setSize(100, 30);
-        surnameLabel.setLocation(100, 150);
+        surnameLabel.setLocation(160, 150);
         add(surnameLabel);
 
         JLabel phoneLabel = new JLabel("Phone:");
         phoneLabel.setSize(100, 30);
-        phoneLabel.setLocation(100, 200);
+        phoneLabel.setLocation(160, 200);
         add(phoneLabel);
 
         JLabel emailLabel = new JLabel("Email:");
         emailLabel.setSize(100, 30);
-        emailLabel.setLocation(100, 250);
+        emailLabel.setLocation(160, 250);
         add(emailLabel);
 
         JLabel signatureLabel = new JLabel("I have read and agree to the terms and conditions:");
         signatureLabel.setSize(300, 30);
-        signatureLabel.setLocation(100, 350);
+        signatureLabel.setLocation(120, 350);
         add(signatureLabel);
 
         // Text Fields
         JTextField nameField = new JTextField("");
         nameField.setSize(150, 30);
-        nameField.setLocation(200, 100);
+        nameField.setLocation(260, 100);
         add(nameField);
 
         JTextField surnameField = new JTextField("");
         surnameField.setSize(150, 30);
-        surnameField.setLocation(200, 150);
+        surnameField.setLocation(260, 150);
         add(surnameField);
 
         JTextField phoneField = new JTextField("");
         phoneField.setSize(150, 30);
-        phoneField.setLocation(200, 200);
+        phoneField.setLocation(260, 200);
         add(phoneField);
 
         JTextField emailField = new JTextField("");
         emailField.setSize(150, 30);
-        emailField.setLocation(200, 250);
+        emailField.setLocation(260, 250);
         add(emailField);
 
         JCheckBox signatureCheckBox = new JCheckBox();
         signatureCheckBox.setSize(30, 30);
-        signatureCheckBox.setLocation(400, 350);
+        signatureCheckBox.setLocation(420, 350);
         add(signatureCheckBox);
 
         // Buttons
         JButton next = new JButton("Proceed");
         next.setSize(150, 50);
-        next.setLocation(300, 425);
+        next.setLocation(320, 425);
         add(next);
 
         JButton back = new JButton("Back");
@@ -81,6 +83,9 @@ public class AddClient extends JPanel {
             String phone = phoneField.getText();
             String email = emailField.getText();
 
+            username = parent.getAuthorizationMenu().getUsername();
+            password = parent.getAuthorizationMenu().getPassword();
+
             boolean agreedToTerms = signatureCheckBox.isSelected();
 
             if (agreedToTerms) {
@@ -88,7 +93,7 @@ public class AddClient extends JPanel {
                 if (email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                     try {
                         // Create a connection to the database
-                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clientlist", "root", "mypass");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clientlist", username, password);
 
                         // Prepare the SQL query to insert client data
                         String insertQuery = "INSERT INTO clients (first_name, last_name, phone_number, email, date_of_business) VALUES (?, ?, ?, ?, ?)";

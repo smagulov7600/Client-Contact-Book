@@ -1,7 +1,6 @@
 import javax.swing.*;
 public class MainMenu extends JPanel {
     public MainMenu(MainFrame parent){
-
         setSize(600,600);
         setLayout(null);
 
