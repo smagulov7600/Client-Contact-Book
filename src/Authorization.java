@@ -30,7 +30,7 @@ public class Authorization extends JPanel {
         nameField.setLocation(175,50);
         add(nameField);
 
-        JTextField passwordField = new JTextField("");
+        JPasswordField passwordField = new JPasswordField("");
         passwordField.setSize(100,30);
         passwordField.setLocation(175,95);
         add(passwordField);
