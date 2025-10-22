@@ -15,4 +15,4 @@ Functionality and structure:
 - The List All Clients button displays a table of all clients, with search functionality for filtering results by name and surname.
 - If an issue occurs, the application will provide a user-friendly error message.
 
-Note: the application will only connect to a local database name "clientlist"
+Note: the application will only connect to a local database named "clientlist"
