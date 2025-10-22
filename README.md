@@ -1,5 +1,8 @@
 This application provides a user-friendly interface for managing client information in a MySQL database.
 
+Dependencies:
+- **JDK 25**
+
 Libraries and APIs used:
 - Java Database Connectivity API connects the application to a database.
 - UI is built with the Java Swing library.
