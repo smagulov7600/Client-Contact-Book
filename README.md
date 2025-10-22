@@ -14,3 +14,5 @@ Functionality and structure:
 - The Add Client button creates a new menu that allows users to input client details and insert them into the database. 
 - The List All Clients button displays a table of all clients, with search functionality for filtering results by name and surname.
 - If an issue occurs, the application will provide a user-friendly error message.
+
+Note: the application will only connect to a local database name "clientlist"
